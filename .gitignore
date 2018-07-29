@@ -1,2 +1,4 @@
 *~
 rtvpenv
+*.pyc
+plotterapp/*.pyc
