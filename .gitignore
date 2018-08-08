@@ -2,3 +2,4 @@
 rtvpenv
 *.pyc
 plotterapp/*.pyc
+migrations
