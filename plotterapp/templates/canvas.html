@@ -3,9 +3,9 @@
 {% block title %} {{project.project_name}} {% endblock %}
 
 {% block content %}
-
-	<canvas id = 'draw'>
-	</canvas>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/canvas.css') }}">
+	<div id="canvasDiv">
+	</div>
 
 	<script src = "{{ url_for('static', filename='javascript/app.js') }}"></script>
 

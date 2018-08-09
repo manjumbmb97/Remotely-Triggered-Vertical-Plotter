@@ -1,9 +1,88 @@
 // Set the canvas id to the variable canvas
-var canvas = document.getElementById('myCanvas');
+var canvasDiv = document.getElementById('canvasDiv');
+canvas = document.createElement('canvas');
 
 // Get the context 2d for the canvas
-var ctx = canvas.getContext('2d');
+context = canvas.getContext('2d');
 
 // Define arrays for storing the pixel values corresponding to the drawing the user has made.
 var mouse_X_pos = new Array();
 var mouse_Y_pos = new Array();
+var clickDrag = new Array();
+
+//Canvas dimension variables
+//TODO: For now dummy numbers. Change these later to get data from the user form input.
+var canvasWidth = 1000;
+var canvasHeight = 500;
+
+// Set the canvas window attributes.
+canvas.setAttribute('width', canvasWidth);
+canvas.setAttribute('height', canvasHeight);
+canvas.setAttribute('id', 'canvas')
+
+//Append the canvas to canvasDiv
+canvasDiv.appendChild(canvas);
+
+//Set the paint intially to false
+var paint = false;
+
+if(typeof G_vmlCanvasManager != 'undefined') {
+	canvas = G_vmlCanvasManager.initElement(canvas);
+}
+
+// When the user starts drawing we record the position in an array via the add click function.
+// This is for when the user is clicking down on the screen.
+$('#canvas').mousedown(function(e){
+  var mouseX = e.pageX - this.offsetLeft;
+  var mouseY = e.pageY - this.offsetTop;
+
+  paint = true;
+  addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
+  redraw();
+});
+
+// If paint is true, then this will start drawing.
+// We first record the position in the array & drawing starts. This is for moving the
+// virtual pen on the screen.
+$('#canvas').mousemove(function(e){
+  if(paint){
+    addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop, true);
+    redraw();
+  }
+});
+
+// For when the mouse button is released.
+$('#canvas').mouseup(function(e){
+  paint = false;
+});
+$('#canvas').mouseleave(function(e){
+  paint = false;
+});
+
+function addClick(x, y, dragging)
+{
+    mouse_X_pos.push(x);
+    mouse_Y_pos.push(y);
+    clickDrag.push(dragging);
+}
+
+// This is where we draw in the canvas.
+function redraw(){
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+
+  context.strokeStyle = "#df4b26";
+  context.lineJoin = "round";
+  context.lineWidth = 5;
+
+  for(var i=0; i < clickX.length; i++) {
+    context.beginPath();
+    if(clickDrag[i] && i){
+      context.moveTo(clickX[i-1], clickY[i-1]);
+     }else{
+       context.moveTo(clickX[i]-1, clickY[i]);
+     }
+     context.lineTo(clickX[i], clickY[i]);
+     context.closePath();
+     context.stroke();
+  }
+}
