@@ -70,10 +70,12 @@ function addClick(x, y, dragging)
 
 // This is where we draw in the canvas.
 function redraw(){
+  // Clear the canvas
+  // https://stackoverflow.com/questions/39519847/clear-function-on-canvas-isnt-working-properly
   $("#clearCanvas").click(function () {
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       clickX = []; clickY = []; clickDrag = []; // This will empty the array after the clear button has been pressed.
-    }); // Clears the canvas
+    });
 
   context.strokeStyle = "#df4b26";
   context.lineJoin = "round";
