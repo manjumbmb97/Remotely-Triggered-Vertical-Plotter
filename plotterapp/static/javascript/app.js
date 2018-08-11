@@ -1,5 +1,6 @@
 // Set the canvas id to the variable canvas
 var canvasDiv = document.getElementById('canvasDiv');
+var clearCanvas = document.getElementById('clearcanvas');
 canvas = document.createElement('canvas');
 
 // Get the context 2d for the canvas
@@ -23,7 +24,7 @@ canvas.setAttribute('id', 'canvas')
 //Append the canvas to canvasDiv
 canvasDiv.appendChild(canvas);
 
-//Set the paint intially to false
+//Intially set the paint to false
 var paint = false;
 
 if(typeof G_vmlCanvasManager != 'undefined') {
@@ -59,6 +60,7 @@ $('#canvas').mouseleave(function(e){
   paint = false;
 });
 
+// Stores the x & y coordinates of mouse
 function addClick(x, y, dragging)
 {
     mouse_X_pos.push(x);
@@ -68,20 +70,24 @@ function addClick(x, y, dragging)
 
 // This is where we draw in the canvas.
 function redraw(){
-  context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
+  $("#clearCanvas").click(function () {
+      context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+      clickX = []; clickY = []; clickDrag = []; // This will empty the array after the clear button has been pressed.
+    }); // Clears the canvas
 
   context.strokeStyle = "#df4b26";
   context.lineJoin = "round";
+  //TODO: Later set this to user preference or pencil width of the plotter.
   context.lineWidth = 5;
 
-  for(var i=0; i < clickX.length; i++) {
+  for(var i=0; i < mouse_X_pos.length; i++) {
     context.beginPath();
     if(clickDrag[i] && i){
-      context.moveTo(clickX[i-1], clickY[i-1]);
+      context.moveTo(mouse_X_pos[i-1], mouse_Y_pos[i-1]);
      }else{
-       context.moveTo(clickX[i]-1, clickY[i]);
+       context.moveTo(mouse_X_pos[i]-1, mouse_Y_pos[i]);
      }
-     context.lineTo(clickX[i], clickY[i]);
+     context.lineTo(mouse_X_pos[i], mouse_Y_pos[i]);
      context.closePath();
      context.stroke();
   }
