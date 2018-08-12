@@ -5,9 +5,9 @@ from wtforms.validators import DataRequired
 class NewProjectForm(FlaskForm):
 	project_name = StringField('Project Name', validators=[DataRequired()])
 	SCALES = [
-		('in', 'inch'),
-		('ft', 'feet'),
-		('m', 'meter'),
+		('0', 'inch'),
+		('1', 'foot'),
+		('2', 'meter'),
 	]
 	scale_type = SelectField('Select scale', choices=SCALES, validators=[DataRequired()])
 	width = FloatField('Width', validators=[DataRequired()])

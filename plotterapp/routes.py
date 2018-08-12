@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for, session
 from flask_wtf import form
+from wtforms import ValidationError
 from plotterapp import plotterapp, db
 from .models import Canvas
 from .forms import NewProjectForm
@@ -24,6 +25,15 @@ def project_form():
 		project.height = form.height.data
 		project.mounting_distance = form.mounting_distance.data
 		project.origin_distance = form.origin_distance.data
+		if form.scale_type.data == '0':	#inches
+			project.widthPx = form.width.data*300
+			project.heightPx = form.height.data*300
+		elif form.scale_type.data == '1':		#foot
+			project.widthPx = form.width.data*3600
+			project.heightPx = form.height.data*3600
+		else:		#meter
+			project.widthPx = form.width.data*(283465/24)
+			project.heightPx = form.height.data*(283465/24)
 		db.session.add(project)
 		db.session.commit()
 		return redirect(url_for('canvas',id=project.id))

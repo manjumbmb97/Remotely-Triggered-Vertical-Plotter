@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form.css') }}">
     </head>
 
-    <body>
+    <body {% block funcCall %}{% endblock %}>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
