@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, session, request
 from flask_wtf import form
 from wtforms import ValidationError
 from werkzeug.datastructures import FileStorage
-from plotterapp import plotterapp, db
+from plotterapp import plotterapp, db, images
 from .models import Canvas
 from .forms import NewProjectForm
 import base64
