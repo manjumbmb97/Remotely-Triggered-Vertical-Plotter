@@ -11,6 +11,8 @@ class Canvas(db.Model):
 	heightPx = db.Column(db.Float)
 	mounting_distance = db.Column(db.Float)
 	origin_distance = db.Column(db.Float)
+	image_filename = db.Column(db.String, default=None, nullable=True)
+	image_url = db.Column(db.String, default=None, nullable=True)
 
 	def __repr__(self):
 		return '<Canvas {}>'.format(self.project_name)

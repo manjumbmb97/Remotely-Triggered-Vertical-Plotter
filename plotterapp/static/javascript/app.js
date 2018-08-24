@@ -1,4 +1,4 @@
-function loadCanvas(cwidth, cheight,scaleType) {// Set the canvas id to the variable canvas
+function loadCanvas(cwidth, cheight,scaleType,project_id) {// Set the canvas id to the variable canvas
   var canvasDiv = document.getElementById('canvasDiv');
   var clearCanvas = document.getElementById('clearcanvas');
   canvas = document.createElement('canvas');
@@ -55,7 +55,8 @@ function loadCanvas(cwidth, cheight,scaleType) {// Set the canvas id to the vari
   // Set the canvas window attributes.
   canvas.setAttribute('width', canvasWidth);
   canvas.setAttribute('height', canvasHeight);
-  canvas.setAttribute('id', 'canvas')
+  canvas.setAttribute('id', 'canvas');
+  canvas.setAttribute('name', 'canvas');
 
   //Append the canvas to canvasDiv
   canvasDiv.appendChild(canvas);
@@ -129,4 +130,21 @@ function loadCanvas(cwidth, cheight,scaleType) {// Set the canvas id to the vari
        context.stroke();
     }
   }
+  $("#submitCanvas").click(function(){
+    var img = canvas.toDataURL("image/png");
+    img = img.split(',')[1];
+      $.ajax({
+        type: 'POST',
+        url: "/render-image/"+project_id,
+        data: JSON.stringify({img: img}),
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        processData: false,
+        async: false,
+        success: function() {
+          window.location.href = "{{ url_for('rendered_image',id=project_id) }}"
+        },
+      });
+  });
 }

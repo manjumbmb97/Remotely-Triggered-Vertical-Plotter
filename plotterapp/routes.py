@@ -1,9 +1,12 @@
-from flask import render_template, flash, redirect, url_for, session
+from flask import render_template, flash, redirect, url_for, session, request
 from flask_wtf import form
 from wtforms import ValidationError
+from werkzeug.datastructures import FileStorage
 from plotterapp import plotterapp, db
 from .models import Canvas
 from .forms import NewProjectForm
+import base64
+#import Image
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -43,3 +46,23 @@ def project_form():
 def canvas(id):
 	project = Canvas.query.filter_by(id=id).first_or_404()
 	return render_template('canvas.html',project=project)
+
+@plotterapp.route('/render-image/<id>', methods=['GET', 'POST'])
+def render_image(id):
+	canvas = Canvas.query.get(id)
+	data = request.get_json().get("img")
+	filename = "image"+id+".png"
+	canvas.image_filename = filename
+	with open('plotterapp/static/images/'+filename, "wb") as fh:
+		fh.write(base64.decodebytes(data.encode()))
+	fh.close()
+	canvas.image_url = images.url(filename)
+	db.session.add(canvas)
+	db.session.commit()
+	return "success"
+
+#@plotterapp.route('/send-data/<id>', methods=['GET', 'POST'])
+#def send_data(id):
+#	canvas = Canvas.query.get(id)
+#	image = Image.open(canvas.image_filename)
+	
