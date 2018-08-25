@@ -142,9 +142,6 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {// Set the canvas id 
         cache: false,
         processData: false,
         async: false,
-        success: function() {
-          window.location.href = "{{ url_for('rendered_image',id=project_id) }}"
-        },
       });
   });
 }

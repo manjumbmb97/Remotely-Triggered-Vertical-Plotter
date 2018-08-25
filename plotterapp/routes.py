@@ -6,6 +6,7 @@ from plotterapp import plotterapp, db, images
 from .models import Canvas
 from .forms import NewProjectForm
 import base64
+from .get_location import get
 #import Image
 
 @plotterapp.route('/')
@@ -57,12 +58,8 @@ def render_image(id):
 		fh.write(base64.decodebytes(data.encode()))
 	fh.close()
 	canvas.image_url = images.url(filename)
+	get(filename)
 	db.session.add(canvas)
 	db.session.commit()
 	return "success"
-
-#@plotterapp.route('/send-data/<id>', methods=['GET', 'POST'])
-#def send_data(id):
-#	canvas = Canvas.query.get(id)
-#	image = Image.open(canvas.image_filename)
 	
