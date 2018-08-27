@@ -14,7 +14,7 @@ def get(filename):
 
 	for i in range(0,img_row):
 		for j in range(0,img_col):
-			pixel_num = img_col*j + i
+			pixel_num = img_col*i + j
 			pixel = pic_data[pixel_num]
 			if pixel[3] != 0:
 				txtfile.write(str(i)+" "+str(j)+"\n")
