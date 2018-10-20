@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+{% extends "base.html" %}
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="calibration.css">
-  </head>
-<body onload="startCalibration()">
+{% block title %} {{project.project_name}} {% endblock %}
 
-  <script src="calibration.js"></script>
+{% block funcCall %}onload="startCalibration({{project.widthPx}}, {{project.heightPx}}, {{ project.id }})"{% endblock %}
+
+{% block extraStatic %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calibration.css') }}">
+{% endblock %}
+
+{% block content %}
+  <div id="canvasDiv">
+  </div>
 
   <div class="controller">
     <button onmousedown="moveupleft()" onmouseup="clearmove()" ontouchstart="moveupleft()">Up Left</button>
@@ -19,10 +21,11 @@
   <div class="slidecontainer">
     <input type="range" min="1" max="1023" value="1" class="slider" id="myRange">
   </div>
-  <button>Calibrate</button>
+  <a href="{{ url_for('canvas',id=project.id) }}"><button>Calibrate</button></a>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src = "{{ url_for('static', filename='javascript/calibration.js') }}"></script>
+  <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
-</html>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+
+{% endblock %}

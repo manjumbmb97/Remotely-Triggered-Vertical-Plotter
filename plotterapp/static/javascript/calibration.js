@@ -3,13 +3,18 @@ var botComponent;
 
 //The Slider 
 var slider = document.getElementById("myRange");
-
+var canvasWidth='';
+var canvasHeight='';
+var canvasDiv;
 //Define the function to start the calibration
-function startCalibration() {
+function startCalibration(cwidth, cheight,project_id) {
+    canvasDiv = document.getElementById('canvasDiv');
+    canvasWidth = cwidth;
+    canvasHeight = cheight;
     botComponent = new component(30, 30, "red", 240, 135);
     myProjectArea.start();
     string_left = new draw_strings(0, 0, botComponent.x, botComponent.y);
-    string_right = new draw_strings(myProjectArea.canvas.width, 0, botComponent.x, botComponent.y);
+    string_right = new draw_strings(canvasWidth, 0, botComponent.x, botComponent.y);
 }
 
 //Define the project area.
@@ -17,10 +22,10 @@ var myProjectArea = {
     canvas : document.createElement("canvas"),
     start : function() {
         //TODO: Need to get user canvas input. 
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.setAttribute('width', canvasWidth);
+        this.canvas.setAttribute('height', canvasHeight);
         this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        canvasDiv.appendChild(this.canvas);
         this.interval = setInterval(updateProjectArea, 20);
     },
     clear : function() {

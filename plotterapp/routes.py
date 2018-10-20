@@ -32,15 +32,19 @@ def project_form():
 		if form.scale_type.data == '0':	#inches
 			project.widthPx = form.width.data*300
 			project.heightPx = form.height.data*300
+			project.origin_distance = form.origin_distance.data*300
 		elif form.scale_type.data == '1':		#foot
 			project.widthPx = form.width.data*3600
 			project.heightPx = form.height.data*3600
+			project.origin_distance = form.origin_distance.data*3600
 		else:		#meter
 			project.widthPx = form.width.data*(283465/24)
 			project.heightPx = form.height.data*(283465/24)
+			project.origin_distance = form.origin_distance.data*(283465/24)
 		db.session.add(project)
 		db.session.commit()
-		return redirect(url_for('canvas',id=project.id))
+		#return redirect(url_for('canvas',id=project.id))
+		return redirect(url_for('calibration_page',id=project.id))
 	return render_template('project_form.html', form=form)
 
 @plotterapp.route('/canvas/<id>')
@@ -62,4 +66,9 @@ def render_image(id):
 	db.session.add(canvas)
 	db.session.commit()
 	return "success"
+
+@plotterapp.route('/calibration-page/<id>')
+def calibration_page(id):
+	project = Canvas.query.filter_by(id=id).first_or_404()
+	return render_template('calibration_page.html',project=project)
 	

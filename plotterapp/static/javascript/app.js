@@ -1,5 +1,4 @@
-function loadCanvas(cwidth, cheight,scaleType,project_id) {
-  // Set the canvas id to the variable canvas
+function loadCanvas(cwidth, cheight,scaleType,project_id) {// Set the canvas id to the variable canvas
   var canvasDiv = document.getElementById('canvasDiv');
   var clearCanvas = document.getElementById('clearcanvas');
   canvas = document.createElement('canvas');
@@ -7,17 +6,13 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
   // Get the context 2d for the canvas
   context = canvas.getContext('2d');
 
-  // Define arrays for storing the coordinate values corresponding to the drawing the user has made.
+  // Define arrays for storing the pixel values corresponding to the drawing the user has made.
   var mouse_X_pos = new Array();
   var mouse_Y_pos = new Array();
   var clickDrag = new Array();
 
-  // Define variables to store coordinate values (for touchscreen).
-  var touchX = new Array();
-  var touchY = new Array();
-
   //Get available height and width
-  var iwidth = window.innerWidth;
+  /*var iwidth = window.innerWidth;
   var iheight = window.innerHeight;
 
   var flag = 0;
@@ -55,11 +50,11 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
   else {  //width and height are equal
     var canvasWidth = Math.round(cheight/scaleH);
     var canvasHeight = canvasWidth;
-  }
+  }*/
 
   // Set the canvas window attributes.
-  canvas.setAttribute('width', canvasWidth);
-  canvas.setAttribute('height', canvasHeight);
+  canvas.setAttribute('width', cwidth);
+  canvas.setAttribute('height', cheight);
   canvas.setAttribute('id', 'canvas');
   canvas.setAttribute('name', 'canvas');
 
@@ -73,8 +68,6 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
   	canvas = G_vmlCanvasManager.initElement(canvas);
   }
 
-
-  // From here, we start the code for Mouse Touch.
   // When the user starts drawing we record the position in an array via the add click function.
   // This is for when the user is clicking down on the screen.
   $('#canvas').mousedown(function(e){
@@ -116,7 +109,7 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
   function redraw(){
     // Clear the canvas
     $("#clearCanvas").click(function () {
-        context.clearRect(0, 0, canvasWidth, canvasWidth);
+        context.clearRect(0, 0, cwidth, cheight);
         mouse_X_pos = []; mouse_Y_pos = []; clickDrag = []; // This will empty the array after the clear button has been pressed.
       });
 
@@ -137,21 +130,8 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
        context.stroke();
     }
   }
-
-  // //From here, we start the the code for touchscreen.
-  // function sketchpad_touchStart() {
-  //       // Update the touch co-ordinates
-  //       getTouchPos();
-  //
-  //       drawDot(context,touchX,touchY,12);
-  //
-  //       // Prevents an additional mousedown event being triggered.
-  //       event.preventDefault();
-  //   }
-
-  // Ajax Request for getting the png image of the div element.
   $("#submitCanvas").click(function(){
-    var img = canvas.toDataURL("image/png");
+    var img =canvas.toDataURL("image/png");
     img = img.split(',')[1];
       $.ajax({
         type: 'POST',
