@@ -21,7 +21,6 @@ function startCalibration(cwidth, cheight,project_id) {
 var myProjectArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        //TODO: Need to get user canvas input. 
         this.canvas.setAttribute('width', canvasWidth);
         this.canvas.setAttribute('height', canvasHeight);
         this.context = this.canvas.getContext("2d");

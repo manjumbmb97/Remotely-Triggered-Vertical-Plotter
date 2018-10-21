@@ -1,4 +1,5 @@
-function loadCanvas(cwidth, cheight,scaleType,project_id) {// Set the canvas id to the variable canvas
+function loadCanvas(cwidth, cheight,scaleType,project_id) {
+  // Set the canvas id to the variable canvas
   var canvasDiv = document.getElementById('canvasDiv');
   var clearCanvas = document.getElementById('clearcanvas');
   canvas = document.createElement('canvas');
