@@ -86,12 +86,12 @@ function updateProjectArea() {
 
 //Moves the bot up left when the mouse is pressed or held down.
 function moveupleft() {
-    botComponent.speedX = -1;
-    string_left.speedX = -1;
-    string_right.speedX = -1;
-    botComponent.speedY = -1;
-    string_left.speedY = -1;
-    string_right.speedY = -1;
+    botComponent.speedX = -slider.value;
+    string_left.speedX = -slider.value;
+    string_right.speedX = -slider.value;
+    botComponent.speedY = -slider.value;
+    string_left.speedY = -slider.value;
+    string_right.speedY = -slider.value;
 }
 
 //Moves the bot down right when the mouse is pressed or held down.

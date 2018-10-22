@@ -7,7 +7,6 @@ from .models import Canvas
 from .forms import NewProjectForm
 import base64
 from .get_location import get
-#import Image
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -43,7 +42,6 @@ def project_form():
 			project.origin_distance = form.origin_distance.data*(283465/24)
 		db.session.add(project)
 		db.session.commit()
-		#return redirect(url_for('canvas',id=project.id))
 		return redirect(url_for('calibration_page',id=project.id))
 	return render_template('project_form.html', form=form)
 
