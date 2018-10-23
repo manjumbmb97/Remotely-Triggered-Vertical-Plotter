@@ -29,17 +29,17 @@ def project_form():
 		project.mounting_distance = form.mounting_distance.data
 		project.origin_distance = form.origin_distance.data
 		if form.scale_type.data == '0':	#inches
-			project.widthPx = form.width.data*300
-			project.heightPx = form.height.data*300
-			project.origin_distance = form.origin_distance.data*300
-		elif form.scale_type.data == '1':		#foot
-			project.widthPx = form.width.data*3600
-			project.heightPx = form.height.data*3600
-			project.origin_distance = form.origin_distance.data*3600
-		else:		#meter
-			project.widthPx = form.width.data*(283465/24)
-			project.heightPx = form.height.data*(283465/24)
-			project.origin_distance = form.origin_distance.data*(283465/24)
+			project.widthPx = form.width.data*100
+			project.heightPx = form.height.data*100
+			project.origin_distance = form.origin_distance.data*100
+		#elif form.scale_type.data == '1':		#foot
+		#	project.widthPx = form.width.data*3600
+		#	project.heightPx = form.height.data*3600
+		#	project.origin_distance = form.origin_distance.data*3600
+		#else:		#meter
+		#	project.widthPx = form.width.data*(283465/24)
+		#	project.heightPx = form.height.data*(283465/24)
+		#	project.origin_distance = form.origin_distance.data*(283465/24)
 		db.session.add(project)
 		db.session.commit()
 		return redirect(url_for('calibration_page',id=project.id))
