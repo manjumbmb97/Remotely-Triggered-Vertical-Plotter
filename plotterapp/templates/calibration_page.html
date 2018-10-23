@@ -13,10 +13,14 @@
   </div>
 
   <div class="controller">
-    <button onmousedown="moveupleft()" onmouseup="clearmove()" ontouchstart="moveupleft()">Up Left</button>
-    <button onmousedown="movedownright()" onmouseup="clearmove()" ontouchstart="movedownright()">Down Right</button><br>
-    <button onmousedown="movedownleft()" onmouseup="clearmove()" ontouchstart="movedownleft()">Down Left</button>
-    <button onmousedown="moveupright()" onmouseup="clearmove()" ontouchstart="moveupright()">Up Right</button>
+      <button onmousedown="up()" onmouseup="clearmove()" ontouchstart="up()">Up</button>
+      <button onmousedown="down()" onmouseup="clearmove()" ontouchstart="down()">Down</button><br>
+      <button onmousedown="left()" onmouseup="clearmove()" ontouchstart="left()">Left</button>
+      <button onmousedown="right()" onmouseup="clearmove()" ontouchstart="right()">Right</button><br>
+      <button onmousedown="leftUp()" onmouseup="clearmove()" ontouchstart="leftUp()">Left Up</button>
+      <button onmousedown="rightDown()" onmouseup="clearmove()" ontouchstart="rightDown()">Right Down</button><br>
+      <button onmousedown="leftDown()" onmouseup="clearmove()" ontouchstart="leftDown()">Left Down</button>
+      <button onmousedown="rightUp()" onmouseup="clearmove()" ontouchstart="rightUp()">Right Up</button>
   </div>
   <div class="slidecontainer">
     <input type="range" min="1" max="1023" value="1" class="slider" id="myRange">

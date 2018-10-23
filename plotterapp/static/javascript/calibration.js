@@ -85,17 +85,17 @@ function updateProjectArea() {
 
 
 //Moves the bot up left when the mouse is pressed or held down.
-function moveupleft() {
-    botComponent.speedX = -slider.value;
-    string_left.speedX = -slider.value;
-    string_right.speedX = -slider.value;
-    botComponent.speedY = -slider.value;
-    string_left.speedY = -slider.value;
-    string_right.speedY = -slider.value;
+function leftUp() {
+    botComponent.speedX = -1;
+    string_left.speedX = -1;
+    string_right.speedX = -1;
+    botComponent.speedY = -1;
+    string_left.speedY = -1;
+    string_right.speedY = -1;
 }
 
 //Moves the bot down right when the mouse is pressed or held down.
-function movedownright() { 
+function rightDown() { 
     botComponent.speedX = 1
     botComponent.speedY = 1
     string_left.speedX = 1;
@@ -105,7 +105,7 @@ function movedownright() {
 }
 
 //Moves the bot down left when the mouse is pressed or held down.
-function movedownleft() { 
+function leftDown() { 
     botComponent.speedX = -1
     botComponent.speedY = 1
     string_left.speedX = -1;
@@ -115,7 +115,7 @@ function movedownleft() {
 }
 
 //Moves the bot up right when the mouse is pressed or held down.
-function moveupright() { 
+function rightUp() { 
     botComponent.speedX = 1
     botComponent.speedY = -1
     string_left.speedX = 1;
@@ -123,6 +123,35 @@ function moveupright() {
     string_right.speedX = 1;
     string_right.speedY = -1;
 }
+
+//Moves the bot up
+function up() {
+    botComponent.speedY = -1;
+    string_left.speedY = -1;
+    string_right.speedY = -1;
+}
+
+//Moves the bot down
+function down() {
+    botComponent.speedY = 1;
+    string_left.speedY = 1;
+    string_right.speedY = 1;
+}
+
+//Moves the bot towards the left
+function left() {
+    botComponent.speedX = -1;
+    string_left.speedX = -1;
+    string_right.speedX = -1;
+}
+
+//Moves the bot towards the right
+function right() {
+    botComponent.speedX = 1;
+    string_left.speedX = 1;
+    string_right.speedX = 1;
+}
+
 
 //Reduces the speed to 0 when the mouse button is not pressed.
 function clearmove() {
@@ -133,6 +162,7 @@ function clearmove() {
     string_right.speedX = 0;
     string_right.speedY = 0;
 }
+
 
 // output.innerHTML = slider.value; // Display the default slider value
 
