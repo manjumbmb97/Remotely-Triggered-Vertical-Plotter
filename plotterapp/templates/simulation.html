@@ -5,7 +5,7 @@
 {% block funcCall %}onload="startCalibration({{project.widthPx}}, {{project.heightPx}}, {{ project.id }})"{% endblock %}
 
 {% block extraStatic %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/calibration.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/simulation.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -25,8 +25,8 @@
   <div class="slidecontainer">
     <input type="range" min="1" max="1023" value="1" class="slider" id="myRange">
   </div>
-  <a href="{{ url_for('canvas',id=project.id) }}"><button>Calibrate</button></a>
+  <a href="{{ url_for('canvas',id=project.id) }}"><button>Start Drawing</button></a>
 
-  <script src = "{{ url_for('static', filename='javascript/calibration.js') }}"></script>
+  <script src = "{{ url_for('static', filename='javascript/simulation.js') }}"></script>
 
 {% endblock %}

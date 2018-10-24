@@ -7,6 +7,7 @@ from .models import Canvas
 from .forms import NewProjectForm
 import base64
 from .get_location import get
+import json
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -65,8 +66,20 @@ def render_image(id):
 	db.session.commit()
 	return "success"
 
+@plotterapp.route('/simulation-page/<id>')
+def simulation_page(id):
+	project = Canvas.query.filter_by(id=id).first_or_404()
+	return render_template('simulation.html',project=project)
+
 @plotterapp.route('/calibration-page/<id>')
 def calibration_page(id):
 	project = Canvas.query.filter_by(id=id).first_or_404()
-	return render_template('calibration_page.html',project=project)
+	return render_template('calibration.html',project=project)
 	
+@plotterapp.route('/calibration-data', methods=['GET', 'POST'])
+def get_calibration_data():
+	if request.method=="POST":
+		print(request.json.get('target'))
+		return "Success"
+	else:
+		return "Fail"
