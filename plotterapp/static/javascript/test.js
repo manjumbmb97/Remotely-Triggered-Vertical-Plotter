@@ -10,7 +10,6 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
   // Define arrays for storing the pixel values corresponding to the drawing the user has made.
   var mouse_X_pos = new Array();
   var mouse_Y_pos = new Array();
-  var xy = new Array();
   var clickDrag = new Array();
 
   //Get available height and width
@@ -113,14 +112,13 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
     // Clear the canvas
     $("#clearCanvas").click(function () {
         context.clearRect(0, 0, cwidth, cheight);
-        sendData("reset",xC.toFixed(2),yC.toFixed(2));
         mouse_X_pos = []; mouse_Y_pos = []; clickDrag = []; // This will empty the array after the clear button has been pressed.
       });
 
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     //TODO: Later set this to user preference or pencil width of the plotter.
-    context.lineWidth = 1;
+    context.lineWidth = 5;
 
     for(var i=0; i < mouse_X_pos.length; i++) {
       context.beginPath();
@@ -135,26 +133,17 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
     }
   }
   $("#submitCanvas").click(function(){
-    for (var i=0,j=0; (i<mouse_X_pos.length)&&(j<mouse_Y_pos.length);i++,j++) {
-        xC = ((mouse_X_pos[i])/100)*2.54;
-        yC = ((cheight - mouse_Y_pos[j])/100)*2.54;
-        sendData("submit",xC.toFixed(2),yC.toFixed(2));
-        console.log(xC.toFixed(2)+","+yC.toFixed(2)+"\n")
-    }
-  });
-}
-
-function sendData(btnType,x,y){
-  var jsondata = JSON.stringify({
-    'btnType': btnType,
-    'x':x,
-    'y':y,
-  })
-  $.ajax({
-    type: 'POST',
-    url: "http://localhost:5000/save-coordinates",
-    data: jsondata,
-    contentType: "application/json",
-    dataType: "json",
+    var img =canvas.toDataURL("image/png");
+    img = img.split(',')[1];
+      $.ajax({
+        type: 'POST',
+        url: "/render-image/"+project_id,
+        data: JSON.stringify({img: img}),
+        contentType: "application/json",
+        dataType: "json",
+        cache: false,
+        processData: false,
+        async: false,
+      });
   });
 }

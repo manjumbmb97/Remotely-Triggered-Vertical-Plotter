@@ -11,8 +11,6 @@ def get(filename):
 	img_row = (pic.size)[1]
 
 	txtfile = open(basedir + '/static/txt/'+filename[:-4]+".txt", "w")
-	print(img_row)
-	print(img_col)
 	for i in range(0,img_row):
 		if i&1:
 			vI = img_row-i-1

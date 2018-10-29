@@ -8,6 +8,7 @@ from .forms import NewProjectForm
 import base64
 from .get_location import get
 import json
+import os
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -50,6 +51,21 @@ def project_form():
 def canvas(id):
 	project = Canvas.query.filter_by(id=id).first_or_404()
 	return render_template('canvas.html',project=project)
+
+@plotterapp.route('/save-coordinates',methods=['GET', 'POST'])
+def save_coordinates():
+	if request.method=="POST":
+		txtfile = open('plotterapp/static/txt/test.txt', "a")
+		if request.json.get("btnType") == "submit":
+			x = request.json.get("x")
+			y = request.json.get("y")
+			txtfile.write(x+ ", "+y+"\n")
+			txtfile.close()
+		else:
+			print("reset")
+		return "Success"
+	else:
+		return "Fail"
 
 @plotterapp.route('/render-image/<id>', methods=['GET', 'POST'])
 def render_image(id):
