@@ -1,4 +1,4 @@
-function loadCanvas(cwidth, cheight,scaleType,project_id) {
+﻿function loadCanvas(cwidth, cheight,scaleType,project_id) {
   // Set the canvas id to the variable canvas
   var canvasDiv = document.getElementById('canvasDiv');
   var clearCanvas = document.getElementById('clearcanvas');
@@ -141,9 +141,9 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
         yC1 = (cheight/100)*25.4;
         yC = yC1-yC;
         xC1 = (cwidth/100)*25.4;
-        l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1,2))*42.8;
+        l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC,2))*42.8;
         xC=xC1-xC;
-        l2 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1,2))*44.16;
+        l2 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC,2))*44.16;
         console.log(l1.toFixed(2)+","+l2.toFixed(2));
         sendData("submit",l1.toFixed(2),l2.toFixed(2));
     }

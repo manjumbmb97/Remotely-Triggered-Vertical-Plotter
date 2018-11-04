@@ -9,7 +9,7 @@ import base64
 from .get_location import get
 import json
 import os
-#from .sendData import sendCoordinates
+from .sendData import sendCoordinates
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
