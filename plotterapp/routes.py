@@ -9,6 +9,7 @@ import base64
 from .get_location import get
 import json
 import os
+from .sendData import sendCoordinates
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -59,6 +60,9 @@ def save_coordinates():
 		if request.json.get("btnType") == "submit":
 			x = request.json.get("x")
 			y = request.json.get("y")
+			print(x,y)
+			coords=x+","+y
+			sendCoordinates(coords)
 			txtfile.write(x+ ", "+y+"\n")
 			txtfile.close()
 		else:
