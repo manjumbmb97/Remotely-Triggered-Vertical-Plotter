@@ -16,8 +16,4 @@ if len(arduino_ports) > 1:
 ser = serial.Serial(arduino_ports[0])
 
 def sendCoordinates(coords):
-	incoming_data = ser.read() 
-	if incoming_data == '1':
-		ser.write(coords)
-	elif incoming_data == '0':
-		pass
+	ser.write(coords)
