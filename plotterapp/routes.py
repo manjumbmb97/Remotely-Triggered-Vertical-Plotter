@@ -62,7 +62,7 @@ def save_coordinates():
 			y = request.json.get("y")
 			print(x,y)
 			coords=str(x)+","+str(y)
-			#sendCoordinates(coords)
+			sendCoordinates(coords)
 			txtfile.write(str(x)+ ", "+str(y)+"\n")
 			txtfile.close()
 		else:

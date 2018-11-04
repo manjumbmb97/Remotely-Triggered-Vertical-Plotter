@@ -16,12 +16,8 @@ if len(arduino_ports) > 1:
 ser = serial.Serial(arduino_ports[0])
 
 def sendCoordinates(coords):
-	while True:
-		try:
-			incoming_data = ser.read() 
-			if incoming_data == '1':
-				ser.write(coords)
-			elif incoming_data == '0':
-				pass
-		except KeyboardInterrupt:
-			GPIO.cleanup()
+	incoming_data = ser.read() 
+	if incoming_data == '1':
+		ser.write(coords)
+	elif incoming_data == '0':
+		pass
