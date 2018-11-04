@@ -138,8 +138,14 @@ function loadCanvas(cwidth, cheight,scaleType,project_id) {
     for (var i=0,j=0; (i<mouse_X_pos.length)&&(j<mouse_Y_pos.length);i++,j++) {
         xC = ((mouse_X_pos[i])/100)*2.54;
         yC = ((cheight - mouse_Y_pos[j])/100)*2.54;
-        sendData("submit",xC.toFixed(2),yC.toFixed(2));
-        console.log(xC.toFixed(2)+","+yC.toFixed(2)+"\n")
+        yC1 = (cheight/100)*2.54;
+        yC = yC1-yC;
+        xC1 = (cwidth/100)*2.54;
+        l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1,2));
+        xC=xC1-xC;
+        l2 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1,2));
+        console.log(l1.toFixed(2)+","+l2.toFixed(2));
+        sendData("submit",l1.toFixed(2),l2.toFixed(2));
     }
   });
 }

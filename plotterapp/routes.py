@@ -9,7 +9,7 @@ import base64
 from .get_location import get
 import json
 import os
-from .sendData import sendCoordinates
+#from .sendData import sendCoordinates
 
 @plotterapp.route('/')
 @plotterapp.route('/index')
@@ -53,7 +53,7 @@ def canvas(id):
 	project = Canvas.query.filter_by(id=id).first_or_404()
 	return render_template('canvas.html',project=project)
 
-@plotterapp.route('/save-coordinates',methods=['GET', 'POST'])
+@plotterapp.route('/save-coordinates', methods=['GET', 'POST'])
 def save_coordinates():
 	if request.method=="POST":
 		txtfile = open('plotterapp/static/txt/test.txt', "a")
@@ -61,9 +61,9 @@ def save_coordinates():
 			x = request.json.get("x")
 			y = request.json.get("y")
 			print(x,y)
-			coords=x+","+y
-			sendCoordinates(coords)
-			txtfile.write(x+ ", "+y+"\n")
+			coords=str(x)+","+str(y)
+			#sendCoordinates(coords)
+			txtfile.write(str(x)+ ", "+str(y)+"\n")
 			txtfile.close()
 		else:
 			print("reset")
