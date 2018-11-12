@@ -21,8 +21,8 @@ def sendCoordinates():
 	ser.write(serData.encode())
 	time.sleep(5)
 	
-	rFlag = False
-	lFlag = False
+	# rFlag = False
+	# lFlag = False
 
 	# rFlag = False
 	# lFlag = False
@@ -30,7 +30,6 @@ def sendCoordinates():
 	if len(coords) > 1:
 		coords[i]="0,"+coords[i]
 		ser.write(coords[i].encode())
-		oldCoord = coords[i]
 		i+=1
 	else:
 		print("No coords to send")
@@ -39,25 +38,21 @@ def sendCoordinates():
 
 
 	while True:
-		readData = ser.read()
-		readData = str(readData).split(',')
-		oldCoord = oldCoord.split(',')
-		if (int(readData[0])-int(oldCoord[1]))<200:
-			rFlag=True
-		if (int(readData[1])-int(oldCoord[2]))<200:
-			lFlag=True
-		if rFlag and lFlag:
-			if i<len(coords)-1:
-				coords[i]="1,"+coords[i]
-				ser.write(coords[i].encode())
-				print(coords[i]+": sent")
-				oldCoord = coords[i]
-				i+=1
-				rFlag = False
-				lFlag = False
-			else:
-				print("data transmission ended")
-				break
+		# readData = ser.read()
+		# readData = str(readData.encode()).split(',')
+		# oldCoord = oldCoord.split(',')
+		# if (int(readData[0])-int(oldCoord[1]))<200:
+		# 	rFlag=True
+		# if (int(readData[1])-int(oldCoord[2]))<200:
+		# 	lFlag=True
+		# if rFlag and lFlag:
+		time.sleep(7)
+		if i<len(coords)-1:
+			coords[i]="1,"+coords[i]
+			ser.write(coords[i].encode())
+			print(coords[i]+": sent")
+			i+=1
 		else:
-			continue
+			print("data transmission ended")
+			break
 	return 1
