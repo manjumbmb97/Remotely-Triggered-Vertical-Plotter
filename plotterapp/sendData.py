@@ -19,6 +19,7 @@ def sendCoordinates():
 	# 	time.sleep(1)
 
 	if len(coords) > 1:
+		coords[i]="0,"+coords[i]
 		ser.write(coords[i].encode())
 		i+=1
 	else:
@@ -29,6 +30,7 @@ def sendCoordinates():
 		readData = ser.read()
 		if int(readData.decode()) == 1:
 			if i<len(coords)-1:
+				coords[i]="1,"+coords[i]
 				ser.write(coords[i].encode())
 				print(coords[i]+": sent")
 				i+=1
