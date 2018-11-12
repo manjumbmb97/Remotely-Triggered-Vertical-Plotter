@@ -17,6 +17,15 @@ def sendCoordinates():
 	# 		print("data transmission ended")
 	# 		break
 	# 	time.sleep(1)
+	serData = "0,16435,17126"
+	ser.write(serData.encode())
+
+	while True:
+		readData = ser.read()
+		if int(readData.decode()) == 1:
+			break
+		else:
+			continue
 
 	if len(coords) > 1:
 		coords[i]="0,"+coords[i]
