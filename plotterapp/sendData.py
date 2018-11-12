@@ -22,10 +22,17 @@ def sendCoordinates():
 
 	while True:
 		readData = ser.read()
-		if int(readData.decode()) == 1:
+		if str(readData.decode()) == "r":
+			rFlag = True
+		if str(readData.decode()) == "l":
+			lFlag = True
+		if rFlag and lFlag:
 			break
 		else:
 			continue
+
+	rFlag = False
+	lFlag = False
 
 	if len(coords) > 1:
 		coords[i]="0,"+coords[i]
@@ -37,12 +44,18 @@ def sendCoordinates():
 
 	while True:
 		readData = ser.read()
-		if int(readData.decode()) == 1:
+		if str(readData.decode()) == "r":
+			rFlag = True
+		if str(readData.decode()) == "l":
+			lFlag = True		
+		if rFlag and lFlag:
 			if i<len(coords)-1:
 				coords[i]="1,"+coords[i]
 				ser.write(coords[i].encode())
 				print(coords[i]+": sent")
 				i+=1
+				rFlag = False
+				lFlag = False
 			else:
 				print("data transmission ended")
 				break
