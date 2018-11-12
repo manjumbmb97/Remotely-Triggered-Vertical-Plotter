@@ -20,6 +20,9 @@ def sendCoordinates():
 	serData = "0,16435,17126"
 	ser.write(serData.encode())
 
+	rFlag = False
+	lFlag = False
+	
 	while True:
 		readData = ser.read()
 		if str(readData.decode()) == "r":
