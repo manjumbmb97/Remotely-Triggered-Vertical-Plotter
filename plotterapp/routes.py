@@ -1,3 +1,4 @@
+from flask import Flask
 from flask import render_template, flash, redirect, url_for, session, request
 from flask_wtf import form
 from wtforms import ValidationError
@@ -60,14 +61,28 @@ def save_coordinates():
 		if request.json.get("btnType") == "submit":
 			x = request.json.get("x")
 			y = request.json.get("y")
-			print(x,y)
 			coords=str(x)+","+str(y)
-			sendCoordinates(coords)
-			txtfile.write(str(x)+ ", "+str(y)+"\n")
+			txtfile.write(coords+"\n")
 			txtfile.close()
 		else:
 			print("reset")
+			txtfile.close()
 		return "Success"
+	else:
+		return "Fail"
+
+@plotterapp.route('/send-coordinates', methods=['GET', 'POST'])
+def send_coordinates():
+	if request.method=="POST":
+		if request.json.get("trigData") == "complete":
+			rValue = sendCoordinates()
+			if rValue == 1:
+				print("plotting complete")
+				return "Success"
+			else:
+				return "Fail"
+		else:
+			return "Fail"
 	else:
 		return "Fail"
 

@@ -147,6 +147,7 @@
         console.log(l1.toFixed(2)+","+l2.toFixed(2));
         sendData("submit",l1.toFixed(2),l2.toFixed(2));
     }
+    startPlot("complete");
   });
 }
 
@@ -159,6 +160,19 @@ function sendData(btnType,x,y){
   $.ajax({
     type: 'POST',
     url: "http://localhost:5000/save-coordinates",
+    data: jsondata,
+    contentType: "application/json",
+    dataType: "json",
+  });
+}
+
+function startPlot(trigData){
+  var jsondata = JSON.stringify({
+    'trigData': trigData,
+  })
+  $.ajax({
+    type: 'POST',
+    url: "http://localhost:5000/send-coordinates",
     data: jsondata,
     contentType: "application/json",
     dataType: "json",
