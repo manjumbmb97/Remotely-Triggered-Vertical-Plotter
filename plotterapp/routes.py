@@ -33,8 +33,8 @@ def project_form():
 		project.mounting_distance = form.mounting_distance.data
 		project.origin_distance = form.origin_distance.data
 		if form.scale_type.data == '0':	#inches
-			project.widthPx = form.width.data*100
-			project.heightPx = form.height.data*100
+			project.widthPx = form.width.data*25
+			project.heightPx = form.height.data*25
 			project.origin_distance = form.origin_distance.data*100
 		#elif form.scale_type.data == '1':		#foot
 		#	project.widthPx = form.width.data*3600
