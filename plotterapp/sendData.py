@@ -30,24 +30,12 @@ def sendCoordinates():
 		return 0
 
 	while True:
-		readData = ser.readline()
-		readData = str(readData.decode()).split(',')
-		sentCoords = coords[i].split(',')
-		if readData[0]=='X' or readData[1]=='X':
-			continue
-		if (float(readData[0])-float(sentCoords[1]))<200.0:
-			print(float(readData[0])-float(sentCoords[1]))
-			rFlag=True
-		if (float(readData[1])-float(sentCoords[2]))<200.0:
-			print(float(readData[0])-float(sentCoords[1]))
-			lFlag=True
-		if rFlag and lFlag:
-			i+=1
-			if i<len(coords)-1:
-				ser.write(coords[i].encode())
-				print(coords[i]+": sent")
-				continue
-			else:
-				print("data transmission ended")
-				break
+		time.sleep(4)
+		i+=1
+		if i<len(coords)-1:
+			ser.write(coords[i].encode())
+			print(coords[i]+": sent")
+		else:
+			print("data transmission ended")
+			break
 	return 1
