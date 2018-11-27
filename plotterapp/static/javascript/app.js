@@ -141,9 +141,9 @@
         yC1 = (cheight/25)*25.4;
         //yC = yC1-yC;
         xC1 = (cwidth/25)*25.4;
-        l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1-yC,2))*42.8*4;
+        l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC1-yC,2))*42.8;
         //xC=xC1-xC;
-        l2 = Math.sqrt(Math.pow(xC1-xC,2)+Math.pow(yC1-yC,2))*44.16*4;
+        l2 = Math.sqrt(Math.pow(xC1-xC,2)+Math.pow(yC1-yC,2))*44.16;
         console.log(parseInt(l1)+","+parseInt(l2));
         sendData("submit",parseInt(l1),parseInt(l2));
     }
