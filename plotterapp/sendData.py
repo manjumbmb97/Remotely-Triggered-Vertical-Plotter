@@ -8,51 +8,44 @@ ser = serial.Serial('/dev/ttyUSB0',115200)
 def sendCoordinates():
 	with open('plotterapp/static/txt/test.txt','r') as f:
 		coords = f.read().split('\n')
+
+	j=0
+	while j<len(coords)-1:
+		coords[j]="1,"+coords[j]
+		j+=1
+
+	#insert origin at top most position
+	origin = "0,16435,17126"
+	coords.insert(0,origin)
+
+	rFlag = False
+	lFlag = False
 	i=0
-	# while True:
-	# 	if i < len(coords) - 1:
-	# 		print(coords[i])
-	# 		i+=1
-	# 	else:
-	# 		print("data transmission ended")
-	# 		break
-	# 	time.sleep(1)
-	serData = "0,16435,17126"
-	ser.write(serData.encode())
-	time.sleep(5)
-	
-	# rFlag = False
-	# lFlag = False
 
-	# rFlag = False
-	# lFlag = False
-
-	if len(coords) > 1:
-		coords[i]="0,"+coords[i]
+	#write origin to port iff there is some point other than origin also
+	if len(coords) > 2:
 		ser.write(coords[i].encode())
-		i+=1
 	else:
 		print("No coords to send")
 		return 0
 
-
-
 	while True:
-		# readData = ser.read()
-		# readData = str(readData.encode()).split(',')
-		# oldCoord = oldCoord.split(',')
-		# if (int(readData[0])-int(oldCoord[1]))<200:
-		# 	rFlag=True
-		# if (int(readData[1])-int(oldCoord[2]))<200:
-		# 	lFlag=True
-		# if rFlag and lFlag:
-		time.sleep(7)
-		if i<len(coords)-1:
-			coords[i]="1,"+coords[i]
-			ser.write(coords[i].encode())
-			print(coords[i]+": sent")
+		readData = ser.readline()
+		readData = str(readData.decode()).split(',')
+		sentCoords = coords[i].split(',')
+		if readData[0]=='X' or readData[1]=='X':
+			continue
+		if (int(readData[0])-int(sentCoords[1]))<200:
+			rFlag=True
+		if (int(readData[1])-int(sentCoords[2]))<200:
+			lFlag=True
+		if rFlag and lFlag:
 			i+=1
-		else:
-			print("data transmission ended")
-			break
+			if i<len(coords)-1:
+				ser.write(coords[i].encode())
+				print(coords[i]+": sent")
+				continue
+			else:
+				print("data transmission ended")
+				break
 	return 1
