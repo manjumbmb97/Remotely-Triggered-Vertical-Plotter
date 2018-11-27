@@ -144,8 +144,8 @@
         l1 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC,2))*42.8;
         xC=xC1-xC;
         l2 = Math.sqrt(Math.pow(xC,2)+Math.pow(yC,2))*44.16;
-        console.log(l1.toFixed(2)+","+l2.toFixed(2));
-        sendData("submit",l1.toFixed(2),l2.toFixed(2));
+        console.log(parseInt(l1)+","+parseInt(l2));
+        sendData("submit",parseInt(l1),parseInt(l2));
     }
     startPlot("complete");
   });

@@ -36,8 +36,10 @@ def sendCoordinates():
 		if readData[0]=='X' or readData[1]=='X':
 			continue
 		if (float(readData[0])-float(sentCoords[1]))<200.0:
+			print(float(readData[0])-float(sentCoords[1]))
 			rFlag=True
 		if (float(readData[1])-float(sentCoords[2]))<200.0:
+			print(float(readData[0])-float(sentCoords[1]))
 			lFlag=True
 		if rFlag and lFlag:
 			i+=1
