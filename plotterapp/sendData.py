@@ -35,9 +35,9 @@ def sendCoordinates():
 		sentCoords = coords[i].split(',')
 		if readData[0]=='X' or readData[1]=='X':
 			continue
-		if (int(readData[0])-int(sentCoords[1]))<200:
+		if (float(readData[0])-float(sentCoords[1]))<200.0:
 			rFlag=True
-		if (int(readData[1])-int(sentCoords[2]))<200:
+		if (float(readData[1])-float(sentCoords[2]))<200.0:
 			lFlag=True
 		if rFlag and lFlag:
 			i+=1
