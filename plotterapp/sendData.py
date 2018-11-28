@@ -32,6 +32,7 @@ def sendCoordinates():
 		if i<len(coords)-1:
 			ser.write(coords[i].encode())
 			print(coords[i]+": sent")
+			i+=1
 		else:
 			print("data transmission ended")
 			break
