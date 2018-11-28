@@ -120,7 +120,7 @@
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     //TODO: Later set this to user preference or pencil width of the plotter.
-    context.lineWidth = 1;
+    context.lineWidth = 4;
 
     for(var i=0; i < mouse_X_pos.length; i++) {
       context.beginPath();
@@ -159,7 +159,7 @@ function sendData(btnType,x,y){
   })
   $.ajax({
     type: 'POST',
-    url: "http://localhost:5000/save-coordinates",
+    url: "http://192.168.43.130:5000/save-coordinates",
     data: jsondata,
     contentType: "application/json",
     dataType: "json",
@@ -172,7 +172,7 @@ function startPlot(trigData){
   })
   $.ajax({
     type: 'POST',
-    url: "http://localhost:5000/send-coordinates",
+    url: "http://192.168.43.130:5000/send-coordinates",
     data: jsondata,
     contentType: "application/json",
     dataType: "json",
