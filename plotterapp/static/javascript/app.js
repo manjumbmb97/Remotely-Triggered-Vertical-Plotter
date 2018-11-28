@@ -120,7 +120,7 @@
     context.strokeStyle = "#df4b26";
     context.lineJoin = "round";
     //TODO: Later set this to user preference or pencil width of the plotter.
-    context.lineWidth = 4;
+    context.lineWidth = 1;
 
     for(var i=0; i < mouse_X_pos.length; i++) {
       context.beginPath();
