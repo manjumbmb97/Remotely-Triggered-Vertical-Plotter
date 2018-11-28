@@ -32,7 +32,7 @@ def sendCoordinates():
 		if i<len(coords)-1:
 			ser.write(coords[i].encode())
 			data=coords[i].split(",")
-			print("x:"+((data[1]/42.8)*25)+",y:"+((data[2]/44.16)*25)+": sent")
+			#print("x:"+((data[1]/42.8)*25)+",y:"+((data[2]/44.16)*25)+": sent")
 			i+=1
 		else:
 			print("data transmission ended")
